@@ -1,4 +1,4 @@
-#  ** InfoElixir **
+#  **InfoElixir**
 
 ### **Team Members**
 - Rashmi R
