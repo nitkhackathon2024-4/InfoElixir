@@ -1,0 +1,6 @@
+__pycache__
+code/.streamlit/secrets.toml
+.env
+.DS_Store
+.vscode
+code/hack-venv/
