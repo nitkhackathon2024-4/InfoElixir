@@ -10,7 +10,7 @@
 ### **Problem Statement: Knowledge Distiller App**
 
 ## **Introduction**
-- DocuSmart.ai is designed to streamline study material organization and retrieval.
+- InfoElixir is designed to streamline study material organization and retrieval.
 - The app supports multiple input formats: text, images, handwritten notes, and audio.
 - It automatically parses and extracts meaningful data from these formats.
 - A personalized knowledge graph connects key concepts for better study efficiency.
