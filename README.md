@@ -61,3 +61,14 @@
 
 ## **Conclusion**
 our app offers an innovative solution to enhance students’ learning efficiency by organizing study materials and connecting key concepts through personalized knowledge graphs. With multi-format input support and seamless information retrieval via an intelligent chatbot, the app provides a tailored and collaborative study experience.
+
+## Screenshots
+
+![image](https://github.com/user-attachments/assets/28b0e8af-eb33-47a2-a439-7ae42ca6ecb2)
+
+![image](https://github.com/user-attachments/assets/ebf38999-1575-497f-a36e-e1a2eca26d9c)
+
+![image](https://github.com/user-attachments/assets/05d18a59-592a-4541-9629-4486b9544ee4)
+
+![image](https://github.com/user-attachments/assets/7b199a3b-e464-4fdc-9204-97e7c5e693aa)
+
