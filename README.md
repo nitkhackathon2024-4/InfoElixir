@@ -9,6 +9,9 @@
 
 ### **Problem Statement: Knowledge Distiller App**
 
+## Demo Video: 
+https://drive.google.com/file/d/1q4h93_UQHyEgCYlvc470GEKdgGrYfoQu/view?usp=sharing
+
 ## **Introduction**
 - InfoElixir is designed to streamline study material organization and retrieval.
 - The app supports multiple input formats: text, images, handwritten notes, and audio.
