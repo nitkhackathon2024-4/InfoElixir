@@ -1,0 +1,146 @@
+<%- include('partials/header') %>
+
+<% if (authorised) { %>
+  <p>Welcome <%= fname %> | <a href="/exit">Log Out</a> </button></p>
+
+  <div style="display: flex; justify-content: space-between; padding: 20px;">
+    <!-- Left section with drop area, input fields, and button -->
+    <div style="width: 30%; border: 2px solid black; padding: 20px; border-radius: 15px;">
+      <form id="uploadForm" enctype="multipart/form-data">
+        <label for="file" class="dropbox" id="drop-area" style="display: flex; align-items: center; justify-content: center; border: 2px dashed #999; height: 200px; border-radius: 10px; cursor: pointer;">
+          <span style="font-size: 40px; color: #999;">+</span>
+        </label>
+        <input type="file" id="file" name="file" style="display: none;" accept="*/*" onchange="updateFileName()">
+        <p id="file-name" style="margin-top: 10px; color: #555;"></p>
+
+        <!-- Input Fields -->
+        <div style="margin-top: 20px;">
+          <input type="text" id="subject" name="subject" placeholder="Subject" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px;" required/>
+          <input type="text" id="topic" name="topic" placeholder="Topic" style="width: 100%; padding: 10px; margin-bottom: 10px; border-radius: 5px;" required/>
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" style="width: 100%; padding: 10px; background-color: rgb(252, 7, 7); border-radius: 5px;">Upload</button>
+      </form>
+    </div>
+
+    <!-- Right section (Bot area) -->
+    <div style="width: 65%; border: 2px solid rgb(0, 0, 0); padding: 20px; border-radius: 15px; background-color: white;">
+      CHAT BOT
+      <div id="chat-container" style="height: 400px; overflow-y: auto; border-bottom: 2px solid #ccc; padding: 10px;">
+        <div id="chatbox">
+          <!-- Chat messages will appear here -->
+        </div>
+      </div>
+
+      <div style="display: flex; margin-top: 10px;">
+        <input id="userMessage" type="text" placeholder="Type a message..." style="flex: 1; padding: 10px; border-radius: 5px; border: 2px solid #ccc;">
+        <button id="sendMessage" style="width:65px; padding: 10px 20px; background-color: rgb(252, 7, 7); color: white; border: none; border-radius: 5px; margin-left: 10px;">Send</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  </div>
+
+  <!-- Center section (Graph area) -->
+  <div style="width: 100%; border: 2px solid black; padding: 20px; border-radius: 15px; text-align: center;">
+    <p>GRAPH</p>
+  </div>
+
+  <% if (typeof users !== 'undefined') { %>
+    <p>Friend list</p>
+    <ul>
+      <% users.forEach(function(user) { %>
+        <li><%= user.user_fname %></li>
+      <% }); %>
+    </ul>
+  <% } %>
+
+<% } else { %>
+  <p>Don't have an account yet? <a href="/register">Register</a></p>
+  <p>Already have an account? <a href="/login">Login</a></p>
+<% } %>
+
+<%- include('partials/footer') %>
+
+
+<script>
+
+  // Function to update the file name display
+  function updateFileName() {
+    const fileInput = document.getElementById('file');
+    const fileNameDisplay = document.getElementById('file-name');
+
+    if (fileInput.files.length > 0) {
+      fileNameDisplay.textContent = fileInput.files[0].name;
+    } else {
+      fileNameDisplay.textContent = "No file selected";
+    }
+  }
+
+  document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('uploadForm').addEventListener('submit', function(event) {
+    event.preventDefault(); // Prevent the form from submitting normally
+
+    // Log a message to the console
+    console.log('Form submitted');
+
+    // Collect the values
+    const fname = '<%= fname %>'; // Get the fname from EJS
+    const subject = document.getElementById('subject').value;
+    const topicTitle = document.getElementById('topic').value;
+    const fileInput = document.getElementById('file');
+
+    console.log(fileInput.files[0]);
+
+    const filePath = fileInput.files.length > 0 ? fileInput.files[0].name : ""; // Get the uploaded file name
+
+    // Create the JSON object
+    const jsonData = {
+      "name": fname,
+      "subject": subject,
+      "topic": {
+        "title": topicTitle,
+        "file_path": filePath
+      }
+    };
+
+    // Log the JSON object to console
+    console.log(JSON.stringify(jsonData, null, 2));
+
+    //Hitting the API
+    // Call the API with the JSON data
+    fetch('http://35.245.224.244:5000/', {
+      method: 'POST', // Specify the request method
+      headers: {
+        'Content-Type': 'application/json', // Set the content type
+      },
+      body: JSON.stringify(jsonData) // Convert the JSON object to a string
+    })
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Network response was not ok ' + response.statusText);
+      }
+      return response.json(); // Parse the response as JSON
+    })
+    .then(data => {
+      console.log('Success:', data); // Log the response data
+      // Refresh the graph
+      // Handle successful response (e.g., display a message)
+    })
+    .catch((error) => {
+      console.error('Error:', error); 
+    });
+
+
+    // Clear the form fields
+    this.reset();
+    document.getElementById('file-name').textContent = "No file selected"; // Reset file name display
+  });
+});
+</script>
+
+
+

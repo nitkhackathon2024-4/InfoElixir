@@ -1,0 +1,19 @@
+<%- include('partials/header') %>
+
+<form method="POST">
+  <label for="email">
+    <b>Email</b>
+  </label>
+  <input id="email" type="email" placeholder="Enter Email" name="email" required="required">
+
+  <label for="psw">
+    <b>Password</b>
+  </label>
+  <input id="psw" type="password" placeholder="Enter Password" name="psw" required="required">
+
+  <button type="submit">Login</button>
+</form>
+
+<p>Don't have an account yet? <a href="/register">Register</a></p>
+
+<%- include('partials/footer') %>
